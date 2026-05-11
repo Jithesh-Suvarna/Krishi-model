@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=JetBrains+Mono:wght@400;500&family=Inter:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", sans-serif;
+  --font-display: "Orbitron", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+  
+  --color-hud-bg: #0a0a10;
+  --color-hud-green: #00ff88;
+  --color-hud-cyan: #00e5ff;
+  --color-hud-dark-green: #00331c;
+  --color-hud-glass: rgba(10, 10, 15, 0.85);
+}
+
+@layer base {
+  body {
+    @apply bg-[#0a0a0f] text-gray-200 antialiased overflow-x-hidden;
+    background: radial-gradient(circle at 50% 50%, #151520 0%, #0a0a0f 100%);
+  }
+}
+
+.text-glow-green { text-shadow: 0 0 10px rgba(0, 255, 136, 0.6); }
+.text-glow-cyan { text-shadow: 0 0 10px rgba(0, 229, 255, 0.6); }
+
+/* Scanline animation - Refined from theme */
+.scanline {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%),
+              linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.04));
+  background-size: 100% 2px, 3px 100%;
+  pointer-events: none; z-index: 100;
+}
+
+/* Panel / HUD Card styling */
+.hud-panel {
+  @apply bg-[#0a0a0f]/85 border border-[#00ff88]/30 rounded-sm relative overflow-hidden backdrop-blur-md;
+}
+
+.hud-panel-header {
+  @apply bg-[#00ff88]/10 px-3 py-1.5 font-mono text-[9px] uppercase tracking-widest text-[#00ff88] border-b border-[#00ff88]/20 flex justify-between items-center;
+}
+
+.lcd-strip {
+  @apply bg-[#001a0d] border border-[#00ff88]/40 px-4 py-2 font-mono text-[10px] text-[#00ff88] overflow-hidden whitespace-nowrap;
+}
+
+.lcd-scroll {
+  @apply inline-block;
+  animation: scrollText 30s linear infinite;
+}
+
+@keyframes scrollText {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+
+.pulse-green {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); box-shadow: 0 0 5px rgba(0, 255, 136, 0.5); }
+  50% { opacity: 0.4; transform: scale(0.9); box-shadow: 0 0 2px rgba(0, 255, 136, 0.2); }
+}
